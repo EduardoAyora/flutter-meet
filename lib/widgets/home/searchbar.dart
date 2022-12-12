@@ -10,7 +10,7 @@ class SearchBar extends StatelessWidget {
       child: TextField(
         readOnly: true,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.fromLTRB(15, 10, 20, 10),
+          contentPadding: const EdgeInsets.fromLTRB(15, 15, 20, 15),
           hintText: 'Buscar artista o ciudad',
           filled: true,
           hintStyle: TextStyle(
