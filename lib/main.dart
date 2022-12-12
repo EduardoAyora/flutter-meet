@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_meet2go/widgets/appbar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_meet2go/widgets/home/appbar.dart';
+import 'package:flutter_meet2go/widgets/home/carousel.dart';
+import 'package:flutter_meet2go/widgets/home/searchbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,14 +46,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,39 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Theme.of(context).colorScheme.primary,
         child: Column(
           children: <Widget>[
-            Container(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
-              child: TextField(
-                readOnly: true,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.fromLTRB(15, 10, 20, 10),
-                  hintText: 'Buscar artista o ciudad',
-                  filled: true,
-                  hintStyle: TextStyle(
-                    color: Theme.of(context).colorScheme.onTertiary,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                  ),
-                  fillColor: Theme.of(context).colorScheme.tertiary,
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: Theme.of(context).colorScheme.onTertiary,
-                    size: 24,
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: Color(0x00000000),
-                      width: 0,
-                    ),
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            const SearchBar(),
+            Carousel(
+              height: 400,
+              pathImages: const [
+                'https://www.meet2go.com/_nuxt/img/dd357eb.png',
+                'https://www.meet2go.com/_nuxt/img/dd357eb.png'
+              ],
+            )
           ],
         ),
       ),
