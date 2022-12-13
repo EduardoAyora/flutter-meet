@@ -140,6 +140,11 @@ class EventDetail extends StatelessWidget {
                       child: TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Theme.of(context).colorScheme.secondary),
                           padding: MaterialStateProperty.all<EdgeInsets>(

@@ -11,7 +11,7 @@ class EventsGrid extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final data = ref.watch(eventDataProvider);
+    final data = ref.watch(allEventsFutureProvider);
     return data.when(
       data: (data) {
         List<EventModel> eventsList = data.map((e) => e).toList();
