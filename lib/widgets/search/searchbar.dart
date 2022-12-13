@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_meet2go/providers/event_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchBar extends StatelessWidget {
+class SearchBar extends ConsumerWidget {
   const SearchBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final fieldText = TextEditingController();
 
     clearText() {
@@ -15,7 +17,9 @@ class SearchBar extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(0, 8, 0, 12),
       child: TextField(
         controller: fieldText,
-        onChanged: ((value) {}),
+        onChanged: ((queryText) {
+          ref.read(searchedEventsClientProvider).searchEvents(queryText);
+        }),
         style: const TextStyle(
           color: Colors.white,
         ),

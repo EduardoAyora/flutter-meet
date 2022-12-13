@@ -8,10 +8,11 @@ class ResultsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final data = ref.watch(allEventsSearchFutureProvider('prueba'));
-    return data.when(
-      data: (data) {
-        List<EventModel> eventsList = data.map((e) => e).toList();
+    final eventClientNotifier = ref.watch(searchedEventsClientProvider);
+    // return data.when(
+    //   data: (data) {
+        // List<EventModel> eventsList = data.map((e) => e).toList();
+        List<EventModel> eventsList = eventClientNotifier.searchedEvents;
         // final resultQuantity = eventsList.length as String;
         return ListView.builder(
             shrinkWrap: true,
@@ -25,16 +26,16 @@ class ResultsList extends ConsumerWidget {
                 ),
               );
             });
-      },
-      error: (err, s) => Text(
-        err.toString(),
-        style: const TextStyle(color: Colors.red),
-      ),
-      loading: () => Center(
-        child: CircularProgressIndicator(
-          color: Theme.of(context).colorScheme.secondary,
-        ),
-      ),
-    );
+      // },
+      // error: (err, s) => Text(
+      //   err.toString(),
+      //   style: const TextStyle(color: Colors.red),
+      // ),
+      // loading: () => Center(
+      //   child: CircularProgressIndicator(
+      //     color: Theme.of(context).colorScheme.secondary,
+      //   ),
+      // ),
+    // );
   }
 }
