@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MyCard extends StatelessWidget {
-  const MyCard({super.key});
+  const MyCard({
+    super.key,
+    required this.imageUrl,
+    required this.name,
+    required this.date,
+  });
+
+  final String imageUrl;
+  final String name;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +24,7 @@ class MyCard extends StatelessWidget {
             height: 180,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/banner-meet.jpg"),
+                image: NetworkImage(imageUrl),
                 fit: BoxFit.cover,
               ),
             ),
@@ -33,7 +42,7 @@ class MyCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Prueba'),
+                    Text(name),
                     Text(
                       'Cuenca',
                       style: TextStyle(
@@ -41,7 +50,7 @@ class MyCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'May 31, 2022 - 09:54',
+                      date,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onTertiary,
                       ),

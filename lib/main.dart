@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meet2go/widgets/home/appbar.dart';
-import 'package:flutter_meet2go/widgets/home/card.dart';
 import 'package:flutter_meet2go/widgets/home/carousel.dart';
+import 'package:flutter_meet2go/widgets/home/events_grid.dart';
 import 'package:flutter_meet2go/widgets/home/searchbar.dart';
 import 'package:flutter_meet2go/widgets/home/selectable_buttons_group.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -40,14 +45,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,17 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               const SelectableButtonsGroup(),
-              GridView.count(
-                childAspectRatio: 0.65,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                crossAxisCount: 2,
-                mainAxisSpacing: 0,
-                crossAxisSpacing: 3,
-                children: List.generate(20, (index) {
-                  return MyCard();
-                }),
-              ),
+              const EventsGrid(),
             ],
           ),
         ),
