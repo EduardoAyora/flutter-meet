@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meet2go/model/event_model.dart';
 import 'package:flutter_meet2go/providers/event_provider.dart';
+import 'package:flutter_meet2go/screens/event_detail.dart';
 import 'package:flutter_meet2go/utils/date_utils.dart';
 import 'package:flutter_meet2go/widgets/home/card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,14 +23,34 @@ class EventsGrid extends ConsumerWidget {
           mainAxisSpacing: 0,
           crossAxisSpacing: 3,
           children: List.generate(eventsList.length, (index) {
-            return MyCard(
-              date: formatearDiaYHora(
-                eventsList[index].startDate!,
-                eventsList[index].startTime!,
+            return InkWell(
+              onTap: () => Navigator.of(context).push(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      EventDetail(
+                    event: eventsList[index],
+                  ),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return SlideTransition(
+                      position: Tween(
+                        begin: const Offset(1.0, 0.0),
+                        end: const Offset(0.0, 0.0),
+                      ).animate(animation),
+                      child: child,
+                    );
+                  },
+                ),
               ),
-              imageUrl:
-                  'https://d20zx9sjn15rrf.cloudfront.net/assets/${eventsList[index].coverImage!}',
-              name: eventsList[index].name!,
+              child: MyCard(
+                date: formatearDiaYHora(
+                  eventsList[index].startDate!,
+                  eventsList[index].startTime!,
+                ),
+                imageUrl:
+                    'https://d20zx9sjn15rrf.cloudfront.net/assets/${eventsList[index].coverImage!}',
+                name: eventsList[index].name!,
+              ),
             );
           }),
         );
