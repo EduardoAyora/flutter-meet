@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meet2go/model/event_model.dart';
 import 'package:flutter_meet2go/providers/event_provider.dart';
+import 'package:flutter_meet2go/utils/date_utils.dart';
+import 'package:flutter_meet2go/widgets/search/result_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ResultsList extends ConsumerWidget {
@@ -22,13 +24,13 @@ class ResultsList extends ConsumerWidget {
         padding: const EdgeInsets.all(8),
         itemCount: eventsList.length,
         itemBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            height: 50,
-            child: Center(
-              child: Text(
-                '${eventsList[index].name}',
-              ),
+          return ResultItem(
+            imageUrl: eventsList[index].coverImage,
+            date: formatearDiaYHora(
+              eventsList[index].startDate!,
+              eventsList[index].startTime!,
             ),
+            name: eventsList[index].name,
           );
         });
   }
