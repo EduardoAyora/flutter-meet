@@ -9,33 +9,27 @@ class ResultsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final eventClientNotifier = ref.watch(searchedEventsClientProvider);
-    // return data.when(
-    //   data: (data) {
-        // List<EventModel> eventsList = data.map((e) => e).toList();
-        List<EventModel> eventsList = eventClientNotifier.searchedEvents;
-        // final resultQuantity = eventsList.length as String;
-        return ListView.builder(
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
-            itemCount: eventsList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                height: 50,
-                child: Center(
-                  child: Text('${eventsList[index].name}'),
-                ),
-              );
-            });
-      // },
-      // error: (err, s) => Text(
-      //   err.toString(),
-      //   style: const TextStyle(color: Colors.red),
-      // ),
-      // loading: () => Center(
-      //   child: CircularProgressIndicator(
-      //     color: Theme.of(context).colorScheme.secondary,
-      //   ),
-      // ),
-    // );
+    List<EventModel> eventsList = eventClientNotifier.searchedEvents;
+    if (eventClientNotifier.isSearchLoading) {
+      return Center(
+        child: CircularProgressIndicator(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+      );
+    }
+    return ListView.builder(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(8),
+        itemCount: eventsList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return SizedBox(
+            height: 50,
+            child: Center(
+              child: Text(
+                '${eventsList[index].name}',
+              ),
+            ),
+          );
+        });
   }
 }

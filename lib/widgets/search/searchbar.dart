@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_meet2go/providers/event_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +10,7 @@ class SearchBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final fieldText = TextEditingController();
+    Timer timer = Timer(const Duration(milliseconds: 0), () => {});
 
     clearText() {
       fieldText.clear();
@@ -18,7 +21,10 @@ class SearchBar extends ConsumerWidget {
       child: TextField(
         controller: fieldText,
         onChanged: ((queryText) {
-          ref.read(searchedEventsClientProvider).searchEvents(queryText);
+          timer.cancel();
+          timer = Timer(const Duration(milliseconds: 1000), () {
+            ref.read(searchedEventsClientProvider).searchEvents(queryText);
+          });
         }),
         style: const TextStyle(
           color: Colors.white,
