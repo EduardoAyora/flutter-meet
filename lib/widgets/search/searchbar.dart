@@ -19,6 +19,7 @@ class SearchBar extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 8, 0, 12),
       child: TextField(
+        autofocus: true,
         controller: fieldText,
         onChanged: ((queryText) {
           timer.cancel();
@@ -26,8 +27,9 @@ class SearchBar extends ConsumerWidget {
             ref.read(searchedEventsClientProvider).searchEvents(queryText);
           });
         }),
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.onTertiary,
+          fontWeight: FontWeight.bold,
         ),
         cursorColor: Colors.white,
         decoration: InputDecoration(
