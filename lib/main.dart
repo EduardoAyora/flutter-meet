@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meet2go/widgets/home/appbar.dart';
+import 'package:flutter_meet2go/widgets/home/card.dart';
 import 'package:flutter_meet2go/widgets/home/carousel.dart';
 import 'package:flutter_meet2go/widgets/home/searchbar.dart';
 import 'package:flutter_meet2go/widgets/home/selectable_buttons_group.dart';
@@ -55,18 +56,31 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         color: Theme.of(context).colorScheme.primary,
-        child: Column(
-          children: <Widget>[
-            const SearchBar(),
-            Carousel(
-              height: 400,
-              pathImages: const [
-                'https://www.meet2go.com/_nuxt/img/dd357eb.png',
-                'https://www.meet2go.com/_nuxt/img/dd357eb.png'
-              ],
-            ),
-            const SelectableButtonsGroup()
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              const SearchBar(),
+              Carousel(
+                height: 400,
+                pathImages: const [
+                  'https://www.meet2go.com/_nuxt/img/dd357eb.png',
+                  'https://www.meet2go.com/_nuxt/img/dd357eb.png'
+                ],
+              ),
+              const SelectableButtonsGroup(),
+              GridView.count(
+                childAspectRatio: 0.65,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 3,
+                children: List.generate(20, (index) {
+                  return MyCard();
+                }),
+              ),
+            ],
+          ),
         ),
       ),
     );
