@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meet2go/providers/event_provider.dart';
+import 'package:flutter_meet2go/widgets/search/number_of_items.dart';
 import 'package:flutter_meet2go/widgets/search/results_list.dart';
 import 'package:flutter_meet2go/widgets/search/searchbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,26 +40,16 @@ class Search extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
             child: Column(
-              children: [
-                const SearchBar(),
+              children: const [
+                SearchBar(),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     vertical: 2,
                     horizontal: 2,
                   ),
-                  child: Row(
-                    children: [
-                      const Text('Eventos que coinciden con búsqueda '),
-                      Text(
-                        '24',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: NumberOfItems(),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(
                     top: 10,
                   ),
