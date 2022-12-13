@@ -14,6 +14,7 @@ class SearchBar extends ConsumerWidget {
 
     clearText() {
       fieldText.clear();
+      ref.read(searchedEventsClientProvider).resetSearchedEvents();
     }
 
     return Container(
@@ -23,9 +24,13 @@ class SearchBar extends ConsumerWidget {
         controller: fieldText,
         onChanged: ((queryText) {
           timer.cancel();
-          timer = Timer(const Duration(milliseconds: 1000), () {
-            ref.read(searchedEventsClientProvider).searchEvents(queryText);
-          });
+          if (queryText.length < 2) {
+            ref.read(searchedEventsClientProvider).resetSearchedEvents();
+          } else {
+            timer = Timer(const Duration(milliseconds: 1000), () {
+              ref.read(searchedEventsClientProvider).searchEvents(queryText);
+            });
+          }
         }),
         style: TextStyle(
           color: Theme.of(context).colorScheme.onTertiary,
