@@ -55,6 +55,7 @@ class MyHomePage extends StatelessWidget {
         title: const MyAppBar(),
       ),
       body: Container(
+        height: double.infinity,
         color: Theme.of(context).colorScheme.primary,
         child: SingleChildScrollView(
           child: Column(

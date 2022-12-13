@@ -23,6 +23,9 @@ class EventsGrid extends ConsumerWidget {
           mainAxisSpacing: 0,
           crossAxisSpacing: 3,
           children: List.generate(eventsList.length, (index) {
+            final String imageUrl =
+                'https://d20zx9sjn15rrf.cloudfront.net/assets/${eventsList[index].coverImage!}';
+            eventsList[index].coverImage = imageUrl;
             return InkWell(
               onTap: () => Navigator.of(context).push(
                 PageRouteBuilder(
@@ -47,8 +50,7 @@ class EventsGrid extends ConsumerWidget {
                   eventsList[index].startDate!,
                   eventsList[index].startTime!,
                 ),
-                imageUrl:
-                    'https://d20zx9sjn15rrf.cloudfront.net/assets/${eventsList[index].coverImage!}',
+                imageUrl: imageUrl,
                 name: eventsList[index].name!,
               ),
             );
